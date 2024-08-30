@@ -13,7 +13,7 @@
 This package is currently in beta. You can install it using pip:
 
 ```bash
-pip install TestMailHelper==0.3.0b1
+pip install TestMailHelper==0.3.0
 ```
 
 ## Usage
