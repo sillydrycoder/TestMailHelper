@@ -3,7 +3,7 @@ name: Publish Python Package
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch
+      - master  # Trigger on push to master branch
     paths:
       - 'testmailhelper/**'  # Trigger only if changes are in the testmailhelper directory
 
