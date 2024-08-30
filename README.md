@@ -1,32 +1,32 @@
-# TMClient
+# TestMailHelper
 
-TMClient is a Python package for interacting with the Testmail API. It allows you to retrieve email lists and specific emails using the Testmail API.
+**TestMailHelper** is a Python package designed for easy interaction with the [Testmail.app API](https://testmail.app). It simplifies the process of retrieving email lists and fetching specific emails using the API.
 
 ## Features
 
-- Retrieve a list of emails with detailed information.
+- Retrieve a detailed list of emails from the Testmail API.
 - Fetch a specific email by its ID.
 
 ## Installation
 
-You can install `tmclient` using pip. To install it locally from the source code, navigate to the root directory containing `setup.py` and run:
+You can install `TestMailHelper` using pip. To install it locally from the source code, navigate to the root directory containing `setup.py` and run:
 
 ```bash
 pip install .
 ```
 
-Alternatively, if you want to install it from PyPI (once published), use:
+Alternatively, if you want to install it from PyPI, use:
 
 ```bash
-pip install tmclient
+pip install TestMailHelper
 ```
 
 ## Usage
 
-Here's a basic example of how to use the `TMClient` class:
+Here's a basic example of how to use the `TMClient` class provided by the `TestMailHelper` package:
 
 ```python
-from tmclient import TMClient
+from testmailhelper import TMClient
 
 def main():
     client = TMClient(
@@ -34,7 +34,7 @@ def main():
         namespace='your_namespace'
     )
     
-    # Get list of emails
+    # Get a list of emails
     emails = client.get_emails_list()
     print("Email List:")
     for email in emails:
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
 #### `__init__(api_key, namespace)`
 
-Initialize the TMClient with your API key and namespace.
+Initialize the `TMClient` with your API key and namespace.
 
 - `api_key` (str): Your API key for the Testmail API.
 - `namespace` (str): The namespace for the Testmail API.
@@ -89,4 +89,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For questions or support, please contact [Muhammad Ali](mailto:muhammad_alil@workmail.com.com).
+For questions or support, please contact [Muhammad Ali](mailto:muhammad_ali@workmail.com).
