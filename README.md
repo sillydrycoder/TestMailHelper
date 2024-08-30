@@ -9,17 +9,12 @@
 
 ## Installation
 
-You can install `TestMailHelper` using pip. To install it locally from the source code, navigate to the root directory containing `setup.py` and run:
+This package is currently in beta. You can install it using pip:
 
 ```bash
-pip install .
+pip install TestMailHelper==0.2.0b1
 ```
 
-Alternatively, if you want to install it from PyPI, use:
-
-```bash
-pip install TestMailHelper
-```
 
 ## Usage
 
