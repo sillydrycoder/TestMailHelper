@@ -18,32 +18,33 @@ class TMClient:
 
         :return: A list of dictionaries, each representing an email with keys:
                  'from', 'subject', 'tag', 'timestamp', 'id'.
-        :raises requests.exceptions.HTTPError: If the request to the API fails.
+        :raises ValueError: If the API response is not valid JSON.
+        :raises requests.exceptions.RequestException: For any issues with the HTTP request.
         """
         params = {
             'apikey': self.api_key,
             'namespace': self.namespace,
         }
-        response = requests.get(self.base_url, params=params)
-        response.raise_for_status()
+        try:
+            response = requests.get(self.base_url, params=params)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise requests.exceptions.RequestException(f"Failed to retrieve emails list: {e}")
+        
+        try:
+            response_data = response.json()
+        except ValueError as e:
+            raise ValueError(f"Failed to parse JSON response: {e}")
 
-        response_data = response.json()
         email_list = []
-
         all_emails = response_data.get('emails', [])
         for email in all_emails:
-            email_from = email.get('from', 'N/A')
-            email_subject = email.get('subject', 'No Subject')
-            tag_used = email.get('tag', 'No Tag')
-            timestamp = email.get('timestamp', 'N/A')
-            email_id = email.get('id', 'N/A')
-            
             email_list.append({
-                'from': email_from,
-                'subject': email_subject,
-                'tag': tag_used,
-                'timestamp': timestamp,
-                'id': email_id
+                'from': email.get('from', 'N/A'),
+                'subject': email.get('subject', 'No Subject'),
+                'tag': email.get('tag', 'No Tag'),
+                'timestamp': email.get('timestamp', 'N/A'),
+                'id': email.get('id', 'N/A')
             })
 
         return email_list
@@ -54,20 +55,65 @@ class TMClient:
 
         :param email_id: The ID of the email to retrieve.
         :return: A dictionary representing the email, or None if not found.
-        :raises requests.exceptions.HTTPError: If the request to the API fails.
+        :raises ValueError: If the API response is not valid JSON.
+        :raises requests.exceptions.RequestException: For any issues with the HTTP request.
         """
         params = {
             'apikey': self.api_key,
             'namespace': self.namespace,
         }
-        
-        response = requests.get(self.base_url, params=params)
-        response.raise_for_status()
+        try:
+            response = requests.get(self.base_url, params=params)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise requests.exceptions.RequestException(f"Failed to retrieve email with ID {email_id}: {e}")
 
-        response_data = response.json()
-        
+        try:
+            response_data = response.json()
+        except ValueError as e:
+            raise ValueError(f"Failed to parse JSON response: {e}")
+
         for email in response_data.get('emails', []):
             if email.get('id') == email_id:
                 return email
 
         return None
+
+    def get_emails_by_tag(self, tag):
+        """
+        Retrieve a list of emails with a specific tag from the Testmail API.
+
+        :param tag: The tag to filter emails by.
+        :return: A list of dictionaries, each representing an email with keys:
+                 'from', 'subject', 'tag', 'timestamp', 'id'.
+        :raises ValueError: If the API response is not valid JSON.
+        :raises requests.exceptions.RequestException: For any issues with the HTTP request.
+        """
+        params = {
+            'apikey': self.api_key,
+            'namespace': self.namespace,
+        }
+        try:
+            response = requests.get(self.base_url, params=params)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise requests.exceptions.RequestException(f"Failed to retrieve emails with tag {tag}: {e}")
+
+        try:
+            response_data = response.json()
+        except ValueError as e:
+            raise ValueError(f"Failed to parse JSON response: {e}")
+
+        email_list = []
+        all_emails = response_data.get('emails', [])
+        for email in all_emails:
+            if email.get('tag') == tag:
+                email_list.append({
+                    'from': email.get('from', 'N/A'),
+                    'subject': email.get('subject', 'No Subject'),
+                    'tag': email.get('tag', 'No Tag'),
+                    'timestamp': email.get('timestamp', 'N/A'),
+                    'id': email.get('id', 'N/A')
+                })
+
+        return email_list

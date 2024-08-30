@@ -6,15 +6,15 @@
 
 - Retrieve a detailed list of emails from the Testmail API.
 - Fetch a specific email by its ID.
+- Retrieve emails filtered by a specific tag.
 
 ## Installation
 
 This package is currently in beta. You can install it using pip:
 
 ```bash
-pip install TestMailHelper==0.2.0b1
+pip install TestMailHelper==0.3.0b1
 ```
-
 
 ## Usage
 
@@ -43,6 +43,13 @@ def main():
         print(email)
     else:
         print(f"No email found with ID: {email_id}")
+    
+    # Get emails by tag
+    tag = 'some_tag'
+    tagged_emails = client.get_emails_by_tag(tag)
+    print(f"Emails with tag '{tag}':")
+    for email in tagged_emails:
+        print(email)
 
 if __name__ == "__main__":
     main()
@@ -64,7 +71,7 @@ Initialize the `TMClient` with your API key and namespace.
 Retrieve a list of emails from the Testmail API.
 
 - Returns: A list of dictionaries, each representing an email with keys: `'from'`, `'subject'`, `'tag'`, `'timestamp'`, `'id'`.
-- Raises: `requests.exceptions.HTTPError` if the request fails.
+- Raises: `requests.exceptions.RequestException` if the request fails.
 
 #### `get_email_by_id(email_id)`
 
@@ -72,7 +79,15 @@ Retrieve a specific email by its ID.
 
 - `email_id` (str): The ID of the email to retrieve.
 - Returns: A dictionary representing the email, or `None` if not found.
-- Raises: `requests.exceptions.HTTPError` if the request fails.
+- Raises: `requests.exceptions.RequestException` if the request fails.
+
+#### `get_emails_by_tag(tag)`
+
+Retrieve a list of emails with a specific tag.
+
+- `tag` (str): The tag to filter emails by.
+- Returns: A list of dictionaries, each representing an email with keys: `'from'`, `'subject'`, `'tag'`, `'timestamp'`, `'id'`.
+- Raises: `requests.exceptions.RequestException` if the request fails.
 
 ## Contributing
 
