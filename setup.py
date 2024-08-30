@@ -8,6 +8,7 @@ setup(
         'requests',
     ],
     description='A Python package for interacting with the Testmail.app API.',
+    long_description=open('README.md').read(),
     author='Muhammad Ali',
     author_email='muhammad_ali@workmail.com',
     url='https://github.com/tensor35/TestMailHelper',
