@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Trigger on push to main branch
     paths:
-      - 'tmclient/**'  # Trigger only if changes are in the tmclient directory
+      - 'testmailhelper/**'  # Trigger only if changes are in the testmailhelper directory
 
 jobs:
   build:
