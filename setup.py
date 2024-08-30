@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='TestMailHelper',
-    version='0.3.0b1',
+    version='0.3.0',
     packages=find_packages(include=['testmailhelper', 'testmailhelper.*']),
     install_requires=[
         'requests',
@@ -18,4 +18,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
+    python_requires='>=3.6',
 )
