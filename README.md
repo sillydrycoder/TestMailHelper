@@ -10,10 +10,10 @@
 
 ## Installation
 
-This package is currently in beta. You can install it using pip:
+You can install it using pip:
 
 ```bash
-pip install TestMailHelper==0.3.1
+pip install TestMailHelper
 ```
 
 ## Usage
